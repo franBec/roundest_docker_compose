@@ -29,6 +29,21 @@ services:
     depends_on:
       - db
 
+  app_kotlin:
+    image: roundest_kotlin
+    container_name: roundest_app_kotlin
+    ports:
+      - "8082:8080"
+    environment:
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      DATASOURCE_DB: ${DATASOURCE_DB}
+      DATASOURCE_HOST: ${DATASOURCE_HOST}
+      DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
+      DATASOURCE_PORT: ${DATASOURCE_PORT}
+      DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
+    depends_on:
+      - db
+
   db:
     image: postgres:14.15-alpine3.21
     container_name: roundest_db
