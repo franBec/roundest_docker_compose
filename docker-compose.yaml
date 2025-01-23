@@ -1,0 +1,30 @@
+services:
+  app_java:
+    image: roundest_java
+    container_name: roundest_app_java
+    ports:
+      - "8080:8080"
+    environment:
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      DATASOURCE_DB: ${DATASOURCE_DB}
+      DATASOURCE_HOST: ${DATASOURCE_HOST}
+      DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
+      DATASOURCE_PORT: ${DATASOURCE_PORT}
+      DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14.15-alpine3.21
+    container_name: roundest_db
+    environment:
+      POSTGRES_USER: ${DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${DATASOURCE_PASSWORD}
+      POSTGRES_DB: ${DATASOURCE_DB}
+    ports:
+      - "${DATASOURCE_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+
+volumes:
+  pgdata:

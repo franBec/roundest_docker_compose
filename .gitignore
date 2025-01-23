@@ -1,0 +1,7 @@
+# Ignore .env file to keep secrets out of version control
+.env
+
+# IDE and editor folders
+.idea/
+.vscode/
+*.sublime-workspace
