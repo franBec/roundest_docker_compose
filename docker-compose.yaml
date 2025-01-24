@@ -1,4 +1,18 @@
 services:
+  roundest_nextjs:
+    image: roundest_nextjs
+    container_name: roundest_app_nextjs
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_BACKEND_JAVA: http://app_java:8080
+      NEXT_PUBLIC_API_BACKEND_GROOVY: http://app_groovy:8081
+      NEXT_PUBLIC_API_BACKEND_KOTLIN: http://app_kotlin:8082
+    depends_on:
+      - app_java
+      - app_groovy
+      - app_kotlin
+
   app_java:
     image: roundest_java
     container_name: roundest_app_java
